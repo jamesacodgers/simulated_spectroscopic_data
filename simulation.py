@@ -29,14 +29,14 @@ R = 200                                # Number of wavelenghths to measure at
 
 sigma = 2                            # Variance of the random noise
 
-n_continuos = 2                       # Number of interferaring signals that can take conrinuos values
-continuos_correlation = [0.5, -0.2]            # How correlated each signal is with API fraction
-continuos_sd = [1, 1]                # How strong each signal is 
+n_continuos = 0                       # Number of interferaring signals that can take conrinuos values
+continuos_correlation = []   # [-1,1] How correlated each signal is with API fraction
+continuos_sd = []                 # Any number, 
 
 
 n_discreat =  1                        # Number of interfearing signals that can take only descreat values
-discreat_interaction = [10]
-discreat_strength= [10]
+discreat_interaction = [1000]            # Any number,  equivalent of correlatin
+discreat_strength= [10]                # Any number, signal strength
 
 
 mass_mean = 10
@@ -120,7 +120,7 @@ for i in range(n_discreat):
 
 
 # %%
-data = api + excipiant + noise + continuos
+data = api + excipiant + noise + continuos + discreat
 
 plt.figure()
 plt.title("observed data")
@@ -142,6 +142,10 @@ for i in range(n_discreat):
 
 df.head()
 
-df.to_csv("data.csv")
+df.to_csv("data_correlated.csv")
 
 # %%
+
+plt.figure()
+plt.scatter(API_fraction,discreat_value[0])
+plt.show()
