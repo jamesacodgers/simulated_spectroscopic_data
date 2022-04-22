@@ -27,22 +27,22 @@ rand.seed(1234)
 N = 2000                               # Number of data points
 R = 200                                # Number of wavelenghths to measure at
 
-sigma = 2                            # Variance of the random noise
+sigma = 0.02                            # Variance of the random noise
 
-n_continuos = 0                       # Number of interferaring signals that can take conrinuos values
-continuos_correlation = []   # [-1,1] How correlated each signal is with API fraction
-continuos_sd = []                 # Any number, 
+n_continuos = 1                      # Number of interferaring signals that can take conrinuos values
+continuos_correlation = [0]   # [-1,1] How correlated each signal is with API fraction
+continuos_sd = [0.1]                 # Any number, 
 
 
-n_discreat =  1                        # Number of interfearing signals that can take only descreat values
-discreat_interaction = [1000]            # Any number,  equivalent of correlatin
-discreat_strength= [10]                # Any number, signal strength
+n_discreat =  0                        # Number of interfearing signals that can take only descreat values
+discreat_interaction = []            # Any number,  equivalent of correlatin
+discreat_strength= []                # Any number, signal strength
 
 
 mass_mean = 10
-mass_var = 2                   # Amount the mass varies from one sample to the next
+mass_var = 0                  # Amount the mass varies from one sample to the next
 API_frac_mean = 0.1                    # Mean API fraction (must be less than 1)
-API_frac_var = 0.0002                  # API fraction variance (set this very small)
+API_frac_var = 0.02                  # API fraction variance (set this very small)
 
 
 if n_discreat != len(discreat_interaction) or n_discreat != len(discreat_strength):
@@ -82,11 +82,7 @@ beta = alpha*(1-API_frac_mean)/API_frac_mean
 API_fraction = rand.beta(alpha,beta,N)
 
 
-plt.figure()
-plt.title("API fraction")
-plt.hist(API_fraction, bins = 100)
-plt.xlim(0,1)
-plt.show()
+
 
 # %%
 
@@ -105,6 +101,12 @@ noise = rand.normal(0,sigma, (N,R))
 
 api_sd = np.sqrt(API_frac_var)
 
+
+plt.figure()
+plt.title("Mass")
+plt.hist(mass, bins = 100)
+# plt.xlim(0,1)
+plt.show()
 
 for i in range(n_continuos):
     cont_mean = continuos_sd[i]/api_sd *  continuos_correlation[i] *(API_fraction - API_frac_mean)
