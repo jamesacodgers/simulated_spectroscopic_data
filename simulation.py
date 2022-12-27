@@ -24,25 +24,25 @@ def sigmoid(y):
 # This block of code has all the parameters for generating a data set
 rand.seed(1234)
 
-N = 2000                               # Number of data points
-R = 200                                # Number of wavelenghths to measure at
+N = 2000                                # Number of data points
+R = 200                                 # Number of wavelenghths to measure at
 
 sigma = 0.02                            # Variance of the random noise
 
-n_continuos = 1                      # Number of interferaring signals that can take conrinuos values
-continuos_correlation = [0]   # [-1,1] How correlated each signal is with API fraction
-continuos_sd = [0.1]                 # Any number, 
+n_continuos = 1                         # Number of interferaring signals that can take conrinuos values
+continuos_correlation = [0]             # [-1,1] How correlated each signal is with API fraction
+continuos_sd = [0.1]                    # Any number, 
 
 
-n_discreat =  0                        # Number of interfearing signals that can take only descreat values
-discreat_interaction = []            # Any number,  equivalent of correlatin
-discreat_strength= []                # Any number, signal strength
+n_discreat =  0                         # Number of interfearing signals that can take only descreat values
+discreat_interaction = []               # Any number,  equivalent of correlatin
+discreat_strength= []                   # Any number, signal strength
 
 
 mass_mean = 10
-mass_var = 0                  # Amount the mass varies from one sample to the next
-API_frac_mean = 0.1                    # Mean API fraction (must be less than 1)
-API_frac_var = 0.02                  # API fraction variance (set this very small)
+mass_var = 0                            # Amount the mass varies from one sample to the next
+API_frac_mean = 0.1                     # Mean API fraction (must be less than 1)
+API_frac_var = 0.02                     # API fraction variance (set this very small)
 
 
 if n_discreat != len(discreat_interaction) or n_discreat != len(discreat_strength):
@@ -146,8 +146,3 @@ df.head()
 
 df.to_csv("data_correlated.csv")
 
-# %%
-
-plt.figure()
-plt.scatter(API_fraction,discreat_value[0])
-plt.show()
